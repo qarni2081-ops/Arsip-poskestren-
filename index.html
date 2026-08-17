@@ -1,1 +1,667 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Arsip Poskestren</title><style>*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f7f5;color:#17211c}header{background:#0b5d3b;color:#fff;padding:18px 20px;position:sticky;top:0;z-index:2}header h1{margin:0;font-size:22px}header p{margin:5px 0 0;font-size:13px;opacity:.85}nav{display:flex;gap:7px;overflow:auto;background:#fff;padding:10px;border-bottom:1px solid #ddd;position:sticky;top:77px;z-index:2}nav button{border:0;background:#eef5f1;padding:10px 13px;border-radius:9px;white-space:nowrap;color:#174f37;font-weight:bold}nav button.active{background:#0b5d3b;color:#fff}main{max-width:1200px;margin:auto;padding:18px}.page{display:none}.page.active{display:block}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card{background:#fff;border:1px solid #dfe7e2;border-radius:13px;padding:16px;margin-bottom:14px}.number{font-size:27px;font-weight:bold;margin-top:7px}.muted{color:#6c7871;font-size:12px}.table{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:11px 8px;border-bottom:1px solid #e2e8e4;white-space:nowrap}th{background:#f8faf9}.badge{background:#eaf6ef;color:#17613c;padding:5px 8px;border-radius:20px;font-size:11px;font-weight:bold}.toolbar{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}input{padding:10px;border:1px solid #d6e0da;border-radius:8px;background:#fff}.primary{background:#0b5d3b;color:#fff;border:0;border-radius:9px;padding:10px 14px;font-weight:bold}@media(max-width:700px){.cards{grid-template-columns:1fr 1fr}main{padding:11px}.card{padding:13px}nav{top:73px}.number{font-size:23px}}@media(max-width:430px){nav button{font-size:11px;padding:9px}.cards{gap:8px}}</style></head><body><header><h1>🏥 Arsip Poskestren</h1><p>Sistem arsip & administrasi kesehatan — HP dan laptop</p></header><nav><button class="active" onclick="openPage('dashboard',this)">📊 Dashboard</button><button onclick="openPage('santri',this)">👥 Santri</button><button onclick="openPage('kunjungan',this)">🩺 Kunjungan</button><button onclick="openPage('poli',this)">🦷 Poli</button><button onclick="openPage('laporan',this)">📈 Laporan</button><button onclick="openPage('arsip',this)">📁 Arsip</button></nav><main><section id="dashboard" class="page active"><h2>Dashboard</h2><div class="cards"><div class="card"><span class="muted">Total Santri</span><div class="number">1.248</div></div><div class="card"><span class="muted">Kunjungan Bulan Ini</span><div class="number">186</div></div><div class="card"><span class="muted">Rujukan</span><div class="number">12</div></div><div class="card"><span class="muted">Dokumen</span><div class="number">73</div></div></div><div class="card"><h3>Kunjungan Terbaru</h3><div class="table"><table><tr><th>Tanggal</th><th>Nama</th><th>Keluhan</th><th>Status</th></tr><tr><td>16-08-2026</td><td>Ahmad Fauzan</td><td>Demam</td><td><span class="badge">Selesai</span></td></tr><tr><td>16-08-2026</td><td>M. Rizky</td><td>Sakit gigi</td><td><span class="badge">Poli Gigi</span></td></tr></table></div></div></section><section id="santri" class="page"><h2>Data Santri</h2><div class="card"><div class="toolbar"><input id="search" oninput="filterRows()" placeholder="🔎 Cari nama / NIS"><button class="primary" onclick="alert('Form tambah santri akan dibuat pada versi database.')">+ Tambah Santri</button></div><div class="table"><table id="santriTable"><tr><th>No</th><th>Nama</th><th>NIS</th><th>TTL</th><th>Jenjang</th></tr><tr><td>1</td><td>Ahmad Fauzan</td><td>240101</td><td>Cirebon, 12 Jan 2010</td><td>SMPIQU</td></tr><tr><td>2</td><td>M. Rizky</td><td>240102</td><td>Indramayu, 4 Mei 2009</td><td>SMPIQU</td></tr></table></div></div></section><section id="kunjungan" class="page"><h2>Kunjungan Kesehatan</h2><div class="card table"><table><tr><th>Tanggal</th><th>Nama</th><th>Keluhan</th><th>Tindakan</th><th>Petugas</th></tr><tr><td>16-08-2026</td><td>Ahmad Fauzan</td><td>Demam</td><td>Observasi</td><td>Admin</td></tr><tr><td>16-08-2026</td><td>M. Rizky</td><td>Sakit gigi</td><td>Rujuk Poli Gigi</td><td>Admin</td></tr></table></div></section><section id="poli" class="page"><h2>Poli Gigi & Bedah</h2><div class="card table"><table><tr><th>No</th><th>Nama</th><th>Poli</th><th>Tanggal</th><th>Status</th></tr><tr><td>1</td><td>M. Rizky</td><td>Poli Gigi</td><td>16-08-2026</td><td><span class="badge">Terdaftar</span></td></tr><tr><td>2</td><td>Abdullah</td><td>Poli Bedah</td><td>15-08-2026</td><td><span class="badge">Selesai</span></td></tr></table></div></section><section id="laporan" class="page"><h2>Laporan</h2><div class="cards"><div class="card"><span class="muted">Januari</span><div class="number">164</div></div><div class="card"><span class="muted">Februari</span><div class="number">172</div></div><div class="card"><span class="muted">Maret</span><div class="number">191</div></div><div class="card"><span class="muted">April</span><div class="number">186</div></div></div></section><section id="arsip" class="page"><h2>Arsip Dokumen</h2><div class="card table"><table><tr><th>Dokumen</th><th>Kategori</th><th>Tanggal</th><th>Status</th></tr><tr><td>SOP Pendampingan Kesehatan</td><td>SOP</td><td>09-07-2026</td><td><span class="badge">Aktif</span></td></tr><tr><td>Laporan Santri Sakit Bulanan</td><td>Laporan</td><td>31-07-2026</td><td><span class="badge">Arsip</span></td></tr><tr><td>Surat Rujukan Poli Gigi</td><td>Surat</td><td>16-08-2026</td><td><span class="badge">Arsip</span></td></tr></table></div></section></main><script>function openPage(id,b){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');scrollTo(0,0)}function filterRows(){let q=document.getElementById('search').value.toLowerCase();document.querySelectorAll('#santriTable tr').forEach((r,i)=>{if(i)r.style.display=r.innerText.toLowerCase().includes(q)?'':'none'})}</script></body></html>
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arsip Poskestren</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f7f5;color:#17211c}
+header{background:#0b5d3b;color:white;padding:18px 20px}
+header h1{margin:0;font-size:22px}
+header p{margin:5px 0 0;font-size:13px}
+nav{display:flex;gap:7px;overflow:auto;background:white;padding:10px;border-bottom:1px solid #ddd;position:sticky;top:0;z-index:2}
+nav button{border:0;background:#eef5f1;padding:10px 13px;border-radius:9px;white-space:nowrap;color:#174f37;font-weight:bold}
+nav button.active{background:#0b5d3b;color:white}
+main{max-width:1200px;margin:auto;padding:18px}
+.page{display:none}.page.active{display:block}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.card{background:white;border:1px solid #dfe7e2;border-radius:13px;padding:16px;margin-bottom:14px}
+.number{font-size:27px;font-weight:bold;margin-top:7px}
+.muted{color:#6c7871;font-size:12px}
+.table{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:11px 8px;border-bottom:1px solid #e2e8e4;white-space:nowrap}
+th{background:#f8faf9}
+.badge{background:#eaf6ef;color:#17613c;padding:5px 8px;border-radius:20px;font-size:11px;font-weight:bold}
+.toolbar{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+input,select{padding:10px;border:1px solid #d6e0da;border-radius:8px;background:white}
+button.primary{background:#0b5d3b;color:white;border:0;border-radius:9px;padding:10px 14px;font-weight:bold}
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:10;padding:20px}
+.modal.show{display:block}
+.modalbox{background:white;max-width:560px;margin:40px auto;border-radius:14px;padding:18px}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.formgrid label{font-size:12px;font-weight:bold}
+.formgrid input,.formgrid select{width:100%;margin-top:5px}
+.actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
+@media(max-width:700px){
+.cards{grid-template-columns:1fr 1fr}
+main{padding:11px}
+.formgrid{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🏥 Arsip Poskestren</h1>
+<p>Sistem arsip & administrasi kesehatan — HP dan laptop</p>
+</header>
+
+<nav>
+<button class="active" onclick="openPage('dashboard',this)">📊 Dashboard</button>
+<button onclick="openPage('santri',this)">👥 Santri</button>
+<button onclick="openPage('kunjungan',this)">🩺 Kunjungan</button>
+<button onclick="openPage('poli',this)">🦷 Poli</button>
+<button onclick="openPage('laporan',this)">📈 Laporan</button>
+<button onclick="openPage('arsip',this)">📁 Arsip</button>
+</nav>
+
+<main>
+
+<section id="dashboard" class="page active">
+<h2>Dashboard</h2>
+
+<div class="cards">
+<div class="card"><span class="muted">Total Santri</span><div id="totalSantri" class="number">0</div></div>
+<div class="card"><span class="muted">Kunjungan Bulan Ini</span><div id="totalKunjungan" class="number">0</div></div>
+<div class="card"><span class="muted">Rujukan</span><div id="totalRujukan" class="number">0</div></div>
+<div class="card"><span class="muted">Dokumen</span><div class="number">0</div></div>
+</div>
+
+<div class="card">
+<h3>Kunjungan Terbaru</h3>
+<div class="table">
+<table>
+<thead>
+<tr><th>Tanggal</th><th>Nama</th><th>Keluhan</th><th>Poli</th></tr>
+</thead>
+<tbody id="recentVisits"></tbody>
+</table>
+</div>
+</div>
+</section>
+
+<section id="santri" class="page">
+<h2>Data Santri</h2>
+
+<div class="card">
+<div class="toolbar">
+<input id="searchSantri" oninput="renderSantri()" placeholder="🔎 Cari nama / NIS">
+<button class="primary" onclick="openSantriModal()">+ Tambah Santri</button>
+</div>
+
+<div class="table">
+<table>
+<thead>
+<tr>
+<th>No</th><th>Nama</th><th>NIS</th><th>TTL</th>
+<th>Divisi</th><th>Kelas / Ghurfah</th><th>Status</th>
+</tr>
+</thead>
+<tbody id="santriRows"></tbody>
+</table>
+</div>
+</div>
+</section>
+
+<section id="kunjungan" class="page">
+<h2>Kunjungan Kesehatan</h2>
+
+<div class="card">
+<div class="toolbar">
+<input id="searchKunjungan" oninput="renderKunjungan()" placeholder="🔎 Cari nama / NIS">
+<button class="primary" onclick="openKunjunganModal()">+ Tambah Kunjungan</button>
+</div>
+
+<div class="table">
+<table>
+<thead>
+<tr>
+<th>Tanggal</th><th>Nama</th><th>NIS</th><th>Bagian</th>
+<th>Keluhan</th><th>Tindakan</th><th>Poli</th>
+</tr>
+</thead>
+<tbody id="kunjunganRows"></tbody>
+</table>
+</div>
+</div>
+</section>
+
+<section id="poli" class="page">
+<h2>Poli Gigi & Bedah</h2>
+
+<div class="card table">
+<table>
+<thead>
+<tr><th>No</th><th>Nama</th><th>NIS</th><th>Poli</th><th>Tanggal</th><th>Keluhan</th><th>Tindakan</th></tr>
+</thead>
+<tbody id="poliRows"></tbody>
+</table>
+</div>
+</section>
+
+<section id="laporan" class="page">
+<h2>Laporan</h2>
+
+<div class="cards">
+<div class="card"><span class="muted">Total Santri</span><div id="lapSantri" class="number">0</div></div>
+<div class="card"><span class="muted">Total Kunjungan</span><div id="lapKunjungan" class="number">0</div></div>
+</div>
+</section>
+
+<section id="arsip" class="page">
+<h2>Arsip Dokumen</h2>
+<div class="card">
+<p>Arsip dokumen Poskestren.</p>
+</div>
+</section>
+
+</main>
+
+<div id="santriModal" class="modal">
+<div class="modalbox">
+<h3>Tambah Santri</h3>
+
+<div class="formgrid">
+
+<label>Nama
+<input id="sNama">
+</label>
+
+<label>NIS
+<input id="sNis">
+</label>
+
+<label>TTL
+<input id="sTtl">
+</label>
+
+<label>Divisi
+<select id="sDivisi">
+<option value="">Pilih Divisi</option>
+<option>SDIQU</option>
+<option>SMPIQU</option>
+<option>Umum</option>
+</select>
+</label>
+
+<label>Kelas / Ghurfah
+<select id="sKelas">
+<option value="">Pilih</option>
+<option>1</option><option>2</option><option>3</option>
+<option>4</option><option>5</option><option>6</option>
+<option>7</option><option>8</option><option>9</option>
+<option>10</option><option>11</option><option>12</option>
+</select>
+</label>
+
+<label>Status
+<select id="sStatus">
+<option>Aktif</option>
+<option>Nonaktif</option>
+<option>Lulus</option>
+</select>
+</label>
+
+</div>
+
+<div class="actions">
+<button class="primary" onclick="closeModal('santriModal')">Batal</button>
+<button class="primary" onclick="saveSantri()">Simpan</button>
+</div>
+</div>
+</div>
+
+<div id="kunjunganModal" class="modal">
+<div class="modalbox">
+<h3>Tambah Kunjungan</h3>
+
+<div class="formgrid">
+
+<label>Nama
+<input id="kNama">
+</label>
+
+<label>NIS
+<input id="kNis">
+</label>
+
+<label>Bagian
+<input id="kBagian">
+</label>
+
+<label>Tanggal
+<input id="kTanggal" type="date">
+</label>
+
+<label>Keluhan
+<input id="kKeluhan">
+</label>
+
+<label>Tindakan
+<input id="kTindakan">
+</label>
+
+<label>Poli
+<select id="kPoli">
+<option>Umum</option>
+<option>Poli Gigi</option>
+<option>Poli Bedah</option>
+</select>
+</label>
+
+</div>
+
+<div class="actions">
+<button class="primary" onclick="closeModal('kunjunganModal')">Batal</button>
+<button class="primary" onclick="saveKunjungan()">Simpan</button>
+</div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+// ===============================
+// SUPABASE
+// ===============================
+
+const SUPABASE_URL = "URL_SUPABASE_KAMU";
+
+const SUPABASE_PUBLISHABLE_KEY = "key_kamu_di_sini";
+
+const db = supabase.createClient(
+SUPABASE_URL,
+SUPABASE_PUBLISHABLE_KEY
+);
+
+// ===============================
+// NAVIGASI
+// ===============================
+
+function openPage(id,button){
+
+document.querySelectorAll(".page").forEach(x=>{
+x.classList.remove("active");
+});
+
+document.getElementById(id).classList.add("active");
+
+document.querySelectorAll("nav button").forEach(x=>{
+x.classList.remove("active");
+});
+
+button.classList.add("active");
+
+window.scrollTo(0,0);
+
+}
+
+// ===============================
+// MODAL
+// ===============================
+
+function openSantriModal(){
+document.getElementById("santriModal").classList.add("show");
+}
+
+function openKunjunganModal(){
+
+document.getElementById("kTanggal").value=
+new Date().toISOString().slice(0,10);
+
+document.getElementById("kunjunganModal").classList.add("show");
+
+}
+
+function closeModal(id){
+document.getElementById(id).classList.remove("show");
+}
+
+// ===============================
+// SANTRI
+// ===============================
+
+let santriData=[];
+
+async function loadSantri(){
+
+const {data,error}=await db
+.from("arsip")
+.select("*")
+.order("created_at",{ascending:false});
+
+if(error){
+
+console.log(error);
+alert("Data Santri gagal dimuat: "+error.message);
+return;
+
+}
+
+santriData=data||[];
+
+renderSantri();
+
+}
+
+// ===============================
+// TAMPIL SANTRI
+// ===============================
+
+function renderSantri(){
+
+let q=
+(document.getElementById("searchSantri").value||"")
+.toLowerCase();
+
+let rows=santriData.filter(x=>
+
+(x.nama||"").toLowerCase().includes(q) ||
+
+(x.nis||"").toLowerCase().includes(q)
+
+);
+
+document.getElementById("santriRows").innerHTML=
+
+rows.map((x,i)=>`
+
+<tr>
+
+<td>${i+1}</td>
+
+<td>${x.nama||""}</td>
+
+<td>${x.nis||""}</td>
+
+<td>${x.ttl||""}</td>
+
+<td>${x.divisi||""}</td>
+
+<td>${x["kelas / ghurfah"]||""}</td>
+
+<td><span class="badge">${x.status||""}</span></td>
+
+</tr>
+
+`).join("") ||
+
+`<tr><td colspan="7">Belum ada data santri</td></tr>`;
+
+document.getElementById("totalSantri").textContent=
+santriData.length;
+
+document.getElementById("lapSantri").textContent=
+santriData.length;
+
+}
+
+// ===============================
+// SIMPAN SANTRI
+// ===============================
+
+async function saveSantri(){
+
+const data={
+
+nama:document.getElementById("sNama").value,
+
+nis:document.getElementById("sNis").value,
+
+ttl:document.getElementById("sTtl").value,
+
+divisi:document.getElementById("sDivisi").value,
+
+"kelas / ghurfah":
+document.getElementById("sKelas").value,
+
+status:document.getElementById("sStatus").value
+
+};
+
+const {error}=await db
+.from("arsip")
+.insert(data);
+
+if(error){
+
+alert("Gagal menyimpan Santri:\n"+error.message);
+
+return;
+
+}
+
+alert("✅ Data Santri berhasil disimpan!");
+
+closeModal("santriModal");
+
+document.querySelectorAll("#santriModal input")
+.forEach(x=>x.value="");
+
+loadSantri();
+
+}
+
+// ===============================
+// KUNJUNGAN
+// ===============================
+
+let kunjunganData=[];
+
+async function loadKunjungan(){
+
+const {data,error}=await db
+.from("Kunjungan")
+.select("*")
+.order("tanggal",{ascending:false});
+
+if(error){
+
+console.log(error);
+alert("Data Kunjungan gagal dimuat: "+error.message);
+return;
+
+}
+
+kunjunganData=data||[];
+
+renderKunjungan();
+renderPoli();
+renderDashboard();
+
+}
+
+// ===============================
+// TAMPIL KUNJUNGAN
+// ===============================
+
+function renderKunjungan(){
+
+let q=
+(document.getElementById("searchKunjungan").value||"")
+.toLowerCase();
+
+let rows=kunjunganData.filter(x=>
+
+(x.nama||"").toLowerCase().includes(q) ||
+
+(x.nis||"").toLowerCase().includes(q)
+
+);
+
+document.getElementById("kunjunganRows").innerHTML=
+
+rows.map(x=>`
+
+<tr>
+
+<td>${x.tanggal||""}</td>
+
+<td>${x.nama||""}</td>
+
+<td>${x.nis||""}</td>
+
+<td>${x.bagian||""}</td>
+
+<td>${x.keluhan||""}</td>
+
+<td>${x.tindakan||""}</td>
+
+<td><span class="badge">${x.poli||""}</span></td>
+
+</tr>
+
+`).join("") ||
+
+`<tr><td colspan="7">Belum ada kunjungan</td></tr>`;
+
+}
+
+// ===============================
+// SIMPAN KUNJUNGAN
+// ===============================
+
+async function saveKunjungan(){
+
+const data={
+
+nama:document.getElementById("kNama").value,
+
+nis:document.getElementById("kNis").value,
+
+bagian:document.getElementById("kBagian").value,
+
+tanggal:document.getElementById("kTanggal").value,
+
+keluhan:document.getElementById("kKeluhan").value,
+
+tindakan:document.getElementById("kTindakan").value,
+
+poli:document.getElementById("kPoli").value
+
+};
+
+const {error}=await db
+.from("Kunjungan")
+.insert(data);
+
+if(error){
+
+alert("Gagal menyimpan Kunjungan:\n"+error.message);
+
+return;
+
+}
+
+alert("✅ Data Kunjungan berhasil disimpan!");
+
+closeModal("kunjunganModal");
+
+loadKunjungan();
+
+}
+
+// ===============================
+// POLI
+// ===============================
+
+function renderPoli(){
+
+let rows=kunjunganData.filter(x=>
+x.poli==="Poli Gigi" ||
+x.poli==="Poli Bedah"
+);
+
+document.getElementById("poliRows").innerHTML=
+
+rows.map((x,i)=>`
+
+<tr>
+
+<td>${i+1}</td>
+<td>${x.nama||""}</td>
+<td>${x.nis||""}</td>
+<td>${x.poli||""}</td>
+<td>${x.tanggal||""}</td>
+<td>${x.keluhan||""}</td>
+<td>${x.tindakan||""}</td>
+
+</tr>
+
+`).join("") ||
+
+`<tr><td colspan="7">Belum ada antrean poli</td></tr>`;
+
+}
+
+// ===============================
+// DASHBOARD
+// ===============================
+
+function renderDashboard(){
+
+const now=new Date();
+
+const bulan=now.getMonth();
+const tahun=now.getFullYear();
+
+const bulanIni=kunjunganData.filter(x=>{
+
+if(!x.tanggal)return false;
+
+const d=new Date(x.tanggal);
+
+return d.getMonth()===bulan &&
+d.getFullYear()===tahun;
+
+});
+
+document.getElementById("totalKunjungan").textContent=
+bulanIni.length;
+
+document.getElementById("lapKunjungan").textContent=
+kunjunganData.length;
+
+document.getElementById("totalRujukan").textContent=
+
+kunjunganData.filter(x=>
+(x.tindakan||"")
+.toLowerCase()
+.includes("rujuk")
+).length;
+
+document.getElementById("recentVisits").innerHTML=
+
+kunjunganData.slice(0,5).map(x=>`
+
+<tr>
+
+<td>${x.tanggal||""}</td>
+<td>${x.nama||""}</td>
+<td>${x.keluhan||""}</td>
+<td>${x.poli||""}</td>
+
+</tr>
+
+`).join("") ||
+
+`<tr><td colspan="4">Belum ada data</td></tr>`;
+
+}
+
+// ===============================
+// JALANKAN
+// ===============================
+
+loadSantri();
+loadKunjungan();
+
+</script>
+
+</body>
+</html> 
